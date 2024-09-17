@@ -1551,4 +1551,45 @@ public class Solution {
         res = Math.min(res, diff);
         return res;
     }
+
+    // 884. Uncommon Words from Two Sentences
+    public String[] uncommonFromSentences(String s1, String s2) {
+        String[] ss1 = s1.split(" ");
+        String[] ss2 = s2.split(" ");
+        Set<String> set = new HashSet<>();
+        Set<String> mulSet = new HashSet<>();
+        for (int i = 0; i < ss1.length; i++) {
+            if (set.contains(ss1[i])) {
+                mulSet.add(ss1[i]);
+            } else {
+                set.add(ss1[i]);
+            }
+        }
+        Set<String> set2 = new HashSet<>();
+        for (int i = 0; i < ss2.length; i++) {
+            if (set2.contains(ss2[i])) {
+                mulSet.add(ss2[i]);
+            } else {
+                set2.add(ss2[i]);
+            }
+        }
+        List<String> res = new ArrayList<>();
+        for(String str : set){
+            if(mulSet.contains(str)){
+                continue;
+            }
+            if(!set2.contains(str)){
+                res.add(str);
+            }
+        }
+        for(String str : set2){
+            if(mulSet.contains(str)){
+                continue;
+            }
+            if(!set.contains(str)){
+                res.add(str);
+            }
+        }
+        return res.toArray(new String[0]);
+    }
 }
